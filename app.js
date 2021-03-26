@@ -1,6 +1,16 @@
 const express    = require('express');
 
 const app        = express();
+
+const httpServer = require('http').createServer(app);
+
+const options = {
+  cors: {
+    origin: '*',
+  },
+};
+const io = require('socket.io')(httpServer, options);
+
 const cors       = require('cors');
 const bodyParser = require('body-parser');
 const passport      = require('passport');
@@ -38,6 +48,20 @@ app
   .use(logErrors)
   .use(errorHandler);
 
-app.listen(config.port, () => {
-  console.log(`Example app listening at http://localhost:${config.port}`);
+let chats = [];
+io.on('connection', (socket) => {
+  socket.on('newMessage', (newMessage) => {
+    console.log('new client of the socket', newMessage);
+    // chats = [...chats, newMessage];
+    // console.log('chats', chats);
+    // socket.emit('updateChat', chats);
+    socket.broadcast.emit('updateChat', newMessage);
+  });
+
+  socket.on('disconnect', () => {
+    console.log('Client disconnected');
+    // clearInterval(interval);
+  });
 });
+
+httpServer.listen(config.port);
