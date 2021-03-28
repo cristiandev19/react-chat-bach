@@ -52,15 +52,11 @@ let chats = [];
 io.on('connection', (socket) => {
   socket.on('newMessage', (newMessage) => {
     console.log('new client of the socket', newMessage);
-    // chats = [...chats, newMessage];
-    // console.log('chats', chats);
-    // socket.emit('updateChat', chats);
     socket.broadcast.emit('updateChat', newMessage);
   });
 
   socket.on('disconnect', () => {
     console.log('Client disconnected');
-    // clearInterval(interval);
   });
 });
 
