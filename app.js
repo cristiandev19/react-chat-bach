@@ -15,15 +15,15 @@ const io = require('socket.io')(httpServer, options);
 
 const cors       = require('cors');
 const bodyParser = require('body-parser');
-const passport      = require('passport');
+// const passport      = require('passport');
 
 // const { dbConnection } = require('./src/databases/mongodb');
 const { config } = require('./src/config/index');
 
 // passport stuff
-const jwtStrategry  = require('./src/strategies/jwt');
+// const jwtStrategry  = require('./src/strategies/jwt');
 
-passport.use(jwtStrategry);
+// passport.use(jwtStrategry);
 
 // Hacemos la conexion a mongodb
 // dbConnection();
@@ -38,8 +38,8 @@ app
   .use(bodyParser.json({ limit: '5mb' }));
 
 // Importamos modulos
-const exampleRouter = require('./src/modules/example/example.router');
-const authRouter = require('./src/modules/auth/auth.router');
+// const exampleRouter = require('./src/modules/example/example.router');
+// const authRouter = require('./src/modules/auth/auth.router');
 
 app.get('/hola', (req, res) => {
   console.log('holaaaaaa');
@@ -48,9 +48,9 @@ app.get('/hola', (req, res) => {
   });
 });
 // Establecemos las rutas
-app
-  .use('/example', exampleRouter)
-  .use('/auth', authRouter);
+// app
+//   .use('/example', exampleRouter)
+//   .use('/auth', authRouter);
 
 // Middleware para manejo de errores
 app
