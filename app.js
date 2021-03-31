@@ -13,10 +13,10 @@ const options = {
 };
 const io = require('socket.io')(httpServer, options);
 
-io.configure(() => {
-  io.set('transports', ['xhr-polling']);
-  io.set('polling duration', 10);
-});
+// io.configure(() => {
+//   io.set('transports', ['xhr-polling']);
+//   io.set('polling duration', 10);
+// });
 
 const cors       = require('cors');
 const bodyParser = require('body-parser');
@@ -45,6 +45,13 @@ app
 // Importamos modulos
 const exampleRouter = require('./src/modules/example/example.router');
 const authRouter = require('./src/modules/auth/auth.router');
+
+app.get('/hola', (req, res) => {
+  console.log('holaaaaaa');
+  return res.send({
+    hola: 'holaaaaaaa',
+  });
+});
 // Establecemos las rutas
 app
   .use('/example', exampleRouter)
