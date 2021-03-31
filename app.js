@@ -7,8 +7,8 @@ const httpServer = require('http').createServer(app);
 const options = {
   transport : ['websocket', 'polling', 'flashsocket'],
   cors      : {
-    origin: '*',
-    // origins: ['http://localhost:3000'],
+    // origin: '*',
+    origin: ['http://localhost:3000'],
   },
 };
 const io = require('socket.io')(httpServer, options);
