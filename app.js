@@ -13,16 +13,11 @@ const options = {
 };
 const io = require('socket.io')(httpServer, options);
 
-// io.configure(() => {
-//   io.set('transports', ['xhr-polling']);
-//   io.set('polling duration', 10);
-// });
-
 const cors       = require('cors');
 const bodyParser = require('body-parser');
 const passport      = require('passport');
 
-const { dbConnection } = require('./src/databases/mongodb');
+// const { dbConnection } = require('./src/databases/mongodb');
 const { config } = require('./src/config/index');
 
 // passport stuff
@@ -31,7 +26,7 @@ const jwtStrategry  = require('./src/strategies/jwt');
 passport.use(jwtStrategry);
 
 // Hacemos la conexion a mongodb
-dbConnection();
+// dbConnection();
 
 // Importamos los middlewares para manejar los errores
 const { logErrors, errorHandler } = require('./src/utils/middleware/errorHandler');
