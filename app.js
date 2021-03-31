@@ -7,11 +7,16 @@ const httpServer = require('http').createServer(app);
 const options = {
   transport : ['websocket', 'polling', 'flashsocket'],
   cors      : {
-    // origin: '*',
-    origin: ['http://localhost:3000'],
+    origin: '*',
+    // origin: ['http://localhost:3000'],
   },
 };
 const io = require('socket.io')(httpServer, options);
+
+io.configure(() => {
+  io.set('transports', ['xhr-polling']);
+  io.set('polling duration', 10);
+});
 
 const cors       = require('cors');
 const bodyParser = require('body-parser');
